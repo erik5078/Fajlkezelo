@@ -1,0 +1,3 @@
+﻿AktualisMappa1=C://
+AktualisMappa2=C://
+AktualisAblak=0

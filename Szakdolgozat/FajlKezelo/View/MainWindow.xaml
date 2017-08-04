@@ -1,0 +1,81 @@
+﻿<Window x:Class="FajlKezelo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Fájlkezelő" Height="751.119" Width="1500" WindowState="Maximized" KeyDown="Grid_KeyDown">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="363*"/>
+            <ColumnDefinition Width="1129*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="FajlLista1" HorizontalAlignment="Left" Margin="29,144,0,0" VerticalAlignment="Top" Height="349" Width="600"   GridLinesVisibility="None" ItemsSource="{Binding FajlLista1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" CanUserResizeColumns="True" HeadersVisibility="Column" SelectedIndex="{Binding KijeloltElem1}" PreviewKeyDown="FajlLista1_PreviewKeyDown" IsSynchronizedWithCurrentItem="True" SelectedItem="FajlLista1SelectedItem" Grid.ColumnSpan="2" EnableRowVirtualization="False" EnableColumnVirtualization="False">
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="FajlLista1_MouseDoubleClick"/>
+                    <Setter Property="Foreground"  Value="{Binding FajlLista1Betuszin}"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Fájlnév" IsReadOnly="True" Binding="{Binding Path=FajlNev}"  Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Kiterjesztés" IsReadOnly="True"  Binding="{Binding Path=Kiterjesztes}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Méret" IsReadOnly="True"  Binding="{Binding Path=Meret}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Dátum" IsReadOnly="True"  Binding="{Binding Path=Datum, StringFormat={}\{0:yyyy/MM/dd hh:mm\}}" Width="130"></DataGridTextColumn>
+            </DataGrid.Columns>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},
+                                               Path=Tag}">
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+
+        <DataGrid x:Name="FajlLista2"  HorizontalAlignment="Left" Margin="364.895,144,0,0" VerticalAlignment="Top" Height="349" Width="600"   GridLinesVisibility="None" ItemsSource="{Binding FajlLista2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserReorderColumns="False" IsReadOnly="True" CanUserResizeColumns="True" HeadersVisibility="Column" SelectedIndex="{Binding KijeloltElem2}" PreviewKeyDown="FajlLista2_PreviewKeyDown" IsSynchronizedWithCurrentItem="True" Grid.Column="1" SelectedItem="FajlLista1SelectedItem" EnableRowVirtualization="False" EnableColumnVirtualization="False">
+            <DataGrid.Foreground>
+                <ImageBrush/>
+            </DataGrid.Foreground>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="FajlLista2_MouseDoubleClick"/>
+                    <Setter Property="Foreground"  Value="{Binding FajlLista2Betuszin}"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Fájlnév" IsReadOnly="True" Binding="{Binding Path=FajlNev}"  Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Kiterjesztés" IsReadOnly="True"  Binding="{Binding Path=Kiterjesztes}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Méret" IsReadOnly="True"  Binding="{Binding Path=Meret}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="Dátum" IsReadOnly="True"  Binding="{Binding Path=Datum, StringFormat={}\{0:yyyy/MM/dd hh:mm\}}" Width="130"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Attr" IsReadOnly="True"  Binding="{Binding Path=Attr}" Width="90"></DataGridTextColumn>-->
+            </DataGrid.Columns>
+
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}},
+                                               Path=Tag}">
+                            <Setter Property="Background" Value="White" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+
+        <Label x:Name="AktualisMappa1" Content="{Binding AktualisMappa1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="100,99,0,0" VerticalAlignment="Top" FontSize="15" Width="524" Background="{Binding AktualisMappa1Kijeloles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MouseEnter="AktualisMappa1_MouseEnter" MouseDown="AktualisMappa1_MouseDown" Grid.ColumnSpan="2" />
+        <Label x:Name="AktualisMappa2" Content="{Binding AktualisMappa2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="445,99,0,0" VerticalAlignment="Top" FontSize="15" Width="519" Background="{Binding AktualisMappa2Kijeloles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MouseEnter="AktualisMappa2_MouseEnter" MouseDown="AktualisMappa2_MouseDown" Grid.Column="1" />
+        <ComboBox x:Name="Meghajto1" HorizontalAlignment="Left" Margin="29,109,0,0" VerticalAlignment="Top" Width="60" Text="C://" ItemsSource="{Binding Path=Meghajtok}" SelectedItem="{Binding Meghajto1}" />
+        <ComboBox x:Name="Meghajto2" HorizontalAlignment="Left" Margin="365,109,0,0" VerticalAlignment="Top" Width="60" Text="C://" ItemsSource="{Binding Meghajtok}" SelectedItem="{Binding Meghajto2}" Grid.Column="1" />
+        <Button x:Name="Kijelol" Content="Space Kijelölés" HorizontalAlignment="Left" Margin="29,545,0,0" VerticalAlignment="Top" Width="176" Height="42" FontSize="20" Click="Kijelol_Click"/>
+        <Button x:Name="Megnyitas" Content="Enter Megnyitás" HorizontalAlignment="Left" Margin="242,545,0,0" VerticalAlignment="Top" Width="155" Height="42" FontSize="20" Click="Megnyitas_Click" Grid.Column="1"/>
+        <Button x:Name="Lomtarba" Content="Delete Lomtárba" HorizontalAlignment="Left" Margin="29,643,0,0" VerticalAlignment="Top" Width="176" Height="42" FontSize="20" Click="Lomtarba_Click"/>
+        <Button x:Name="Torles" Content="Shift + Delete Törlés" HorizontalAlignment="Left" Margin="280,643,0,0" VerticalAlignment="Top" Width="273" Height="42" FontSize="20" Click="Torles_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="OsszesKijelol" Content="Control + A Összes kilölése" HorizontalAlignment="Left" Margin="280,545,0,0" VerticalAlignment="Top" Width="273" Height="42" FontSize="20" Click="OsszesKijelol_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="Masolas" Content="F5 Másolás" HorizontalAlignment="Left" Margin="242,643,0,0" VerticalAlignment="Top" Width="155" Height="42" FontSize="20" Click="Masolas_Click" Grid.Column="1"/>
+        <Button x:Name="Athelyezes" Content="F6 Áthelyezés" HorizontalAlignment="Left" Margin="462,643,0,0" VerticalAlignment="Top" Width="158" Height="42" FontSize="20" Click="Athelyezes_Click" Grid.Column="1"/>
+    </Grid>
+</Window>
